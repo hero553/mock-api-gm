@@ -1,0 +1,39 @@
+{
+  "name": "mock-data-tool",
+  "version": "1.0.0",
+  "description": "方便好用的 Mock 数据工具，用于开发环境快速模拟 API 响应",
+  "type": "module",
+  "author": "Your Name",
+  "license": "MIT",
+  "keywords": [
+    "tampermonkey",
+    "userscript",
+    "mock",
+    "development-tool",
+    "api-mock"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "release:patch": "bash scripts/release.sh patch",
+    "release:minor": "bash scripts/release.sh minor",
+    "release:major": "bash scripts/release.sh major"
+  },
+  "devDependencies": {
+    "@types/tampermonkey": "^5.0.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vite-plugin-monkey": "^4.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/YOUR_REPO#readme"
+}
+

@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 当推送 v 开头的标签时触发，如 v1.0.0
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile
+
+      - name: 构建脚本
+        run: yarn build
+
+      - name: 读取版本号
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/*.user.js
+          body: |
+            ## 🎭 Mock 数据工具 v${{ steps.version.outputs.VERSION }}
+            
+            ### 安装方式
+            
+            1. 确保已安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展
+            2. 点击下方的 `mock-data-tool.user.js` 文件下载
+            3. Tampermonkey 会自动识别并提示安装
+            
+            ### 主要功能
+            
+            - ✅ 拦截 Fetch 和 XHR 请求
+            - ✅ 可视化管理界面
+            - ✅ 支持正则表达式匹配
+            - ✅ 配置导入导出
+            - ✅ 请求日志查看
+            - ✅ 模拟网络延迟
+            
+            ### 更新日志
+            
+            查看 [CHANGELOG.md](./CHANGELOG.md) 获取详细更新内容
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 通知发布成功
+        if: success()
+        run: |
+          echo "✅ 发布成功！版本: v${{ steps.version.outputs.VERSION }}"
+          echo "📦 下载地址: https://github.com/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.VERSION }}"
+

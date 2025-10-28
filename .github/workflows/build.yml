@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile
+
+      - name: 代码检查
+        run: yarn tsc --noEmit
+
+      - name: 构建脚本
+        run: yarn build
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v3
+        with:
+          name: userscript
+          path: dist/*.user.js
+          retention-days: 30
+
+      - name: 构建成功通知
+        if: success()
+        run: echo "✅ 构建成功！"
+
+      - name: 构建失败通知
+        if: failure()
+        run: echo "❌ 构建失败，请检查日志"
+
