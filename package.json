@@ -29,11 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO.git"
-  },
-  "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/YOUR_REPO/issues"
-  },
-  "homepage": "https://github.com/YOUR_USERNAME/YOUR_REPO#readme"
+    "url": "https://github.com/hero553/mock-api-gm"
+  }
 }
 

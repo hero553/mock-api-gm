@@ -1,7 +1,7 @@
 # 🎭 Mock 数据工具
 
-[![Build](https://github.com/YOUR_USERNAME/YOUR_REPO/workflows/Build/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions)
-[![Release](https://github.com/YOUR_USERNAME/YOUR_REPO/workflows/Release/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/releases)
+[![Build](https://github.com/hero553/mock-api-gm/workflows/Build/badge.svg)](https://github.com/hero553/mock-api-gm/actions)
+[![Deploy](https://github.com/hero553/mock-api-gm/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)](https://github.com/hero553/mock-api-gm/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 方便好用的 Mock 数据工具，用于开发环境快速模拟 API 响应。支持拦截和模拟 Fetch 和 XHR 请求，提供可视化管理界面。
@@ -14,23 +14,32 @@
 - 💾 **配置管理** - 支持导入导出配置，方便团队共享
 - 📊 **请求日志** - 实时查看请求拦截情况
 - ⏱️ **延迟模拟** - 模拟真实的网络延迟
-- 🔄 **快速切换** - 一键启用/禁用规则
+- 🔄 **自动更新** - 每次提交代码自动部署最新版本
 
 ## 📦 安装
 
-### 方式 1：从 GitHub Releases 安装（推荐）
+### 方式 1：一键安装（推荐，自动更新）
 
-1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 浏览器扩展
-2. 前往 [Releases 页面](https://github.com/YOUR_USERNAME/YOUR_REPO/releases)
-3. 下载最新版本的 `mock-data-tool.user.js` 文件
-4. Tampermonkey 会自动识别并提示安装
+点击下方链接安装，Tampermonkey 会自动识别：
 
-### 方式 2：从源码构建
+**🚀 [点击安装最新版本](https://hero553.github.io/mock-api-gm/mock-data-tool.user.js)**
+
+> ✅ **自动更新**: 每次推送代码后，脚本会自动更新到最新版本
+> 
+> ✅ **永久链接**: 链接永远指向最新版本，无需手动更新
+
+### 方式 2：从 GitHub Releases 安装
+
+1. 访问 [Releases 页面](https://github.com/hero553/mock-api-gm/releases)
+2. 下载最新版本的 `mock-data-tool.user.js` 文件
+3. Tampermonkey 会自动识别并提示安装
+
+### 方式 3：从源码构建
 
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/hero553/mock-api-gm.git
+cd mock-api-gm
 
 # 安装依赖
 yarn install
@@ -41,8 +50,6 @@ yarn dev
 # 构建生产版本
 yarn build
 ```
-
-构建后的文件位于 `dist/mock-data-tool.user.js`
 
 ## 🚀 快速开始
 
@@ -102,6 +109,28 @@ yarn build
 - 匹配的规则名称
 - 请求时间
 
+## 🔄 自动更新机制
+
+### 工作原理
+
+1. 每次你推送代码到 GitHub
+2. GitHub Actions 自动构建并部署到 GitHub Pages
+3. Tampermonkey 定期检查更新（通常每24小时）
+4. 发现新版本时自动提示更新
+
+### 手动检查更新
+
+在 Tampermonkey 管理面板中：
+1. 找到 "Mock 数据工具" 脚本
+2. 点击脚本名称旁的图标
+3. 选择 "检查更新"
+
+### 更新地址
+
+脚本配置了以下更新地址：
+- **更新检查**: `https://hero553.github.io/mock-api-gm/mock-data-tool.user.js`
+- **下载地址**: `https://hero553.github.io/mock-api-gm/mock-data-tool.user.js`
+
 ## 🛠️ 开发
 
 ### 技术栈
@@ -110,22 +139,6 @@ yarn build
 - Vite
 - vite-plugin-monkey
 - Tampermonkey API
-
-### 项目结构
-
-```
-油猴脚本/
-├── .github/
-│   └── workflows/      # GitHub Actions CI/CD 配置
-├── src/
-│   ├── main.ts        # 主要脚本代码
-│   └── utils/         # 工具函数
-├── dist/              # 构建输出目录
-├── package.json       # 项目配置
-├── vite.config.ts     # Vite 配置
-├── tsconfig.json      # TypeScript 配置
-└── README.md          # 项目文档
-```
 
 ### 开发命令
 
@@ -137,31 +150,31 @@ yarn dev
 yarn build
 
 # 类型检查
-yarn tsc --noEmit
+yarn typecheck
+```
+
+### 发布流程
+
+```bash
+# 提交代码
+git add .
+git commit -m "feat: add new feature"
+git push
+
+# 脚本会自动部署到 GitHub Pages
+# 用户会自动收到更新
 ```
 
 ## 📝 版本发布
 
-### 自动发布流程
-
-1. 更新 `vite.config.ts` 中的版本号
-2. 更新 `CHANGELOG.md`
-3. 提交代码
-4. 创建并推送标签：
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
-5. GitHub Actions 自动构建并创建 Release
-
-### 手动发布
+如果需要创建正式的 Release：
 
 ```bash
-# 构建
-yarn build
+# 创建标签
+git tag v1.0.1
+git push origin v1.0.1
 
-# 发布到 dist 目录
-# 手动上传到 Greasy Fork 或其他平台
+# GitHub Actions 会自动创建 Release
 ```
 
 ## 🤝 贡献
@@ -188,10 +201,10 @@ yarn build
 
 ## 📞 联系方式
 
-- 提交 Issue: [GitHub Issues](https://github.com/YOUR_USERNAME/YOUR_REPO/issues)
-- 讨论: [GitHub Discussions](https://github.com/YOUR_USERNAME/YOUR_REPO/discussions)
+- 提交 Issue: [GitHub Issues](https://github.com/hero553/mock-api-gm/issues)
+- 项目主页: [GitHub](https://github.com/hero553/mock-api-gm)
+- 安装地址: [GitHub Pages](https://hero553.github.io/mock-api-gm/)
 
 ---
 
 **注意**：此工具仅用于开发环境，请勿在生产环境使用。
-
