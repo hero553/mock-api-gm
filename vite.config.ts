@@ -8,7 +8,7 @@ export default defineConfig({
       entry: 'src/main.ts',
       userscript: {
         // 脚本名称
-        name: '开发环境 Mock 数据工具',
+        name: '重生之我在xiaomi模拟数据(GM)',
         // 命名空间
         namespace: 'http://tampermonkey.net/',
         // 脚本匹配的网址，可以使用通配符
@@ -16,8 +16,11 @@ export default defineConfig({
           'https://*/*',
           'http://*/*',
         ],
-        // 脚本图标
-        icon: '🎭',
+        // 脚本图标 - 使用 iconfont 的 SVG（可替换为你自己的）
+        // 方式1: 使用 emoji（当前）
+        // icon: '🎭',
+        // 方式3: 使用外部链接（需要先上传图标到仓库）
+        icon: 'https://raw.githubusercontent.com/hero553/mock-api-gm/refs/heads/main/src/assets/icon/mock-icon.png',
         // 脚本描述
         description: '方便好用的 Mock 数据工具，支持拦截和模拟 API 响应，适用于开发调试',
         // 作者
